@@ -5,8 +5,8 @@
 <div class="container">
     <CalendarDay 
  v-for="day in items.seedData"
- v-bind:key="day.id"
- :day= day
+ v-bind:key= day.id
+ v-bind:day= day
 />
     </div>
 

@@ -1,26 +1,41 @@
 <template>
-    <div class="card text-left">
+    <div class="card text-left card-deck" @click="activeDay(day.id)">
+        
+         <h4 class="card-title text-center">
+        {{day.id}}
+    </h4>
           <h5 class="card-header">
               {{day.abbvTitle}}
           </h5>
   <div class="card-body">
-    <h4 class="card-title text-center">
-        {{day.id}}
-    </h4>
-    <a href="" class="btn btn-primary">
-        Get Groceries
-    </a>
-    
-    <i class="fa fa-pencil text-center" aria-hidden="true"></i>
-    <i class="fa fa-trash" aria-hidden="true"></i>
+<CalendarEvent
+v-for="(event,index) in day.events"
+v-bind:key= index
+v-bind:day= day
+v-bind:event= event
+/>
+
+   
+  
   </div>
 </div>
 </template>
 
 <script>
+import {store} from '../simplestore/store'
+import CalendarEvent from './calendarEvent.vue'
 export default {
     name:'CalendarDay',
-    props:['day']
+    props:['day'],
+    methods:{
+      activeDay(id){
+        //   alert(id);
+        //   alert('hello');
+        //   console.log(this.day);
+          store.setActiveDay(id);
+      }
+    },
+    components:{CalendarEvent}
 }
 </script>
 <style scoped>
